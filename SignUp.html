@@ -1,0 +1,143 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Signup</title>
+        <meta name="description" content="Website for technical and business Support.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bootstrap4-glyphicons-master/bootstrap4-glyphicons/css/bootstrap-glyphicons.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="stylesheet.css">
+        <script src="htmlInclude.js"></script>
+        <script>
+            function emailValidate(email) {
+                var re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b/;
+                return re.test(String(email).toLowerCase());
+            }
+            function NameValidate(name) {
+                var re = /^[a-zA-Z]+$/;
+                return re.test(String(name));
+            }
+            function UNValidate(UN) {
+                var re = /^[a-zA-Z][a-zA-Z0-9]*$/;
+                return re.test(String(UN));
+            }
+            function PWValidate(PW) {
+                return PW.length >= 8;
+            }
+            function validate(){
+                document.getElementById("fner").innerHTML="";
+                document.getElementById("lner").innerHTML="";
+                document.getElementById("emailer").innerHTML="";
+                document.getElementById("usernameer").innerHTML="";
+                document.getElementById("passer").innerHTML="";
+                document.getElementById("rpasser").innerHTML="";
+                var cond = true;
+                var fnam = document.forms["form1"]["fn"].value;
+                if(fnam == ""){
+                    document.getElementById("fner").innerHTML="please enter your First Name";
+                    document.getElementById("fner").focus();
+                    cond = false;
+                }
+                else{
+                    if(!NameValidate(fnam)) {
+                        document.getElementById("fner").innerHTML="invalid name";
+                        cond = false;
+                  }
+                }
+                var lnam = document.forms["form1"]["ln"].value;
+                if(lnam == ""){
+                    document.getElementById("lner").innerHTML="please enter your Last Name";
+                    document.getElementById("lner").focus();
+                    cond = false;
+                }
+              else{
+                  if(!NameValidate(lnam)) {
+                        document.getElementById("lner").innerHTML="invalid name";
+                        cond = false;
+                  }
+              }
+                var em = document.forms["form1"]["email"].value;
+                if(em == ""){
+                    document.getElementById("emailer").innerHTML="please enter an email";
+                    document.getElementById("emailer").focus();
+                    cond = false;
+                }
+                else{
+                    if(!emailValidate(em)) {
+                        document.getElementById("emailer").innerHTML="invalid email";
+                        cond = false;
+                    }
+                }
+                var un = document.forms["form1"]["username"].value;
+                if(un == ""){
+                    document.getElementById("usernameer").innerHTML="please enter a username";
+                    document.getElementById("usernameer").focus();
+                    cond = false;
+                }
+                else{
+                    if(!UNValidate(un)) {
+                        document.getElementById("usernameer").innerHTML="invalid username";
+                        cond = false;
+                    }
+                }
+                var pw = document.forms["form1"]["pass"].value;
+                var rpw = document.forms["form1"]["rpass"].value;
+                if(pw == ""){
+                    document.getElementById("passer").innerHTML="please enter a password";
+                    document.getElementById("passer").focus();
+                    cond = false;
+                }
+                else{
+                    if(!PWValidate(pw)) {
+                        document.getElementById("passer").innerHTML="invalid password";
+                        cond = false;
+                    } else if(pw != rpw) {
+                        document.getElementById("rpasser").innerHTML="password mismatch";
+                        cond = false;
+                    }
+                }
+                if(!cond) {
+                    alert("please provide valid info");
+                    return false;
+                }
+                return true;
+            }
+        </script>
+        <style>
+/*            li{float: left}*/
+            
+            
+        </style>
+        
+    </head>
+    
+    <body style="background-image: url('weback3.png');">
+        
+        <div w3-include-html="navigationBar.html"></div>
+        <script>
+        includeHTML();
+        </script>
+        
+        
+        <div id="signUpInForm">
+            <form class="form1" name="form1" method="post" onsubmit="return validate()" action="AddPerson.php">
+               <img src="Transparent%20logo%20.png" style="width:100%;" style="float: right; margin-top: 10px;">
+                <h2>Signup</h2>
+                
+                <p>Please fill your information</p>
+                <label for="fn">First Name:</label><input type="text" placeholder="First Name.." name="fn"> <p class="error" id="fner"></p> <br/>
+                <label for="ln">Last Name:</label><input type="text" placeholder="Last Name.." name="ln"><p style="boder: 5px #595959 solid;" class="error" id="lner"></p><br/>
+                <label for="email">Email:</label><input type="text" placeholder="Your Email.." name="email"><p class="error" id="emailer"></p><br/>
+                <label for="username">Username:</label><input type="text" placeholder="Username.." name="username"><p class="error" id="usernameer"></p><br/>
+                <label for="pass">Password:</label><input type="password" placeholder="Password.." name="pass"><p class="error" id="passer"></p><br/>
+                <label for="pass">Repeat Password:</label><input type="password" placeholder="Password.." name="rpass"><p class="error" id="rpasser"></p><br/>
+                <input type="submit"  value="Sign Up">
+            </form>
+        </div>
+        
+        
+    </body>
+</html>

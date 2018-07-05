@@ -1,0 +1,90 @@
+CREATE TABLE Person(Email VARCHAR(25),Username 
+
+VARCHAR(25) NOT NULL ,Password Varchar(25) 
+
+NOT NULL,PRIMARY KEY (Username) );
+
+
+CREATE TABLE Question(Question VARCHAR(80),QID INTEGER 
+
+NOT NULL AUTO_INCREMENT,PRIMARY KEY (QID) );
+
+
+CREATE TABLE Answer(Answer VARCHAR(80),
+
+ QID INTEGER, Username varchar(25) , AID INTEGER 
+
+NOT NULL AUTO_INCREMENT,PRIMARY KEY (AID) );
+
+CREATE TABLE OfferedAnswer( 
+
+Name VARCHAR(80),OID INTEGER not null AUTO_INCREMENT ,QID INTEGER , AID INTEGER 
+
+NOT NULL ,PRIMARY KEY (OID) );
+
+CREATE TABLE Person_Question(QID INTEGER , username varchar(25) , PRIMARY KEY (QID , username ));
+
+create table activity(AcID integer not null auto_increment, name varchar(25), primary key (acID));
+
+create table activity-Person(username varchar(25),AcID integer);
+
+create table activity-question(QID integer , AcID integer);
+______________________________________________________________________________________________________
+
+ALTER TABLE Answer 
+
+ADD FOREIGN KEY (Username) REFERENCES Person
+
+(Username);
+
+ALTER TABLE Answer 
+
+ADD FOREIGN KEY (QID) REFERENCES Question
+
+(QID);
+ALTER TABLE OfferedAnswer
+
+ADD FOREIGN KEY (QID) REFERENCES Question
+
+(QID);
+
+
+ALTER TABLE OfferedAnswer
+
+ADD FOREIGN KEY (AID) REFERENCES Answer
+(AID);
+
+ALTER TABLE Person_Question
+
+ADD FOREIGN KEY (QID) REFERENCES Question
+
+(QID);
+
+ALTER TABLE Person_Question
+
+ADD FOREIGN KEY (Username) REFERENCES Person
+
+(Username);
+
+Alter Table activity_Person
+
+ADD FOREIGN KEY (Username) REFERENCES Person
+
+(Username);
+
+Alter Table activity_Person
+ADD FOREIGN KEY (AcID) REFERENCES activity
+
+(AcID);
+
+Alter Table activity_question
+ADD FOREIGN KEY (QID) REFERENCES question
+
+(QID);
+
+Alter Table activity_question
+ADD FOREIGN KEY (AcID) REFERENCES activity
+
+(AcID);
+
+
